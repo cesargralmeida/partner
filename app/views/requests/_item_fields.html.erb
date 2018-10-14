@@ -1,0 +1,11 @@
+<div class='nested-fields'>
+    <div class="field">
+        <%= f.label :name %>
+        <%= f.select :name, Item::POSSIBLE_ITEMS.invert.collect, include_blank: 'Select an item' %>
+    </div>
+    <div class="field">
+        <%= f.label :quantity %>
+        <%= f.text_field :quantity %>
+    </div>
+    <%= link_to_remove_association "remove item", f %>
+</div>

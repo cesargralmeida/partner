@@ -1,0 +1,34 @@
+<%= form_with(model: @new_request, local: true) do |form| %>
+  <% if @new_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@new_request.errors.count, "error") %> prohibited this request from being saved:</h2>
+
+      <ul>
+      <% @new_request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="hidden">
+    <%= form.hidden_field :organization_id %>
+  </div>
+  <div class="field">
+    <%= form.label :comments %>
+    <%= form.text_area :comments %>
+  </div>
+  
+  <div id='items'>
+    <h3>Items</h3>
+    <%= form.fields_for :items do |item| %>
+      <%= render 'item_fields', :f => item %>
+    <% end %>
+    <div class='links'>
+      <%= link_to_add_association 'add item', form, :items %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Submit for Review' %>
+  </div>
+<% end %>
